@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            width: 100%;
+            text-align: center;
+            padding: 2rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .button-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .button {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            color: #333;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .button.registration {
+            border-top: 5px solid #4CAF50;
+        }
+
+        .button.approvals {
+            border-top: 5px solid #2196F3;
+        }
+
+        .button.list {
+            border-top: 5px solid #f44336;
+        }
+
+        .button-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .button-description {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .button {
+                width: 80%;
+                max-width: 300px;
+            }
+        }
+
+        .search-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #4CAF50;
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+            transition: box-shadow 0.3s;
+        }
+
+        .search-box:focus {
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+        }
+
+        .search-box::placeholder {
+            color: #999;
+        }
+
+        @media (max-width: 768px) {
+            .search-container {
+                padding: 0 2rem;
+            }
+        }
+
+        .button.status {
+            border-top: 5px solid #9C27B0;
+            background-color: white;
+            color: #333;
+        }
+
+        .button.status .button-title {
+            color: #333;
+        }
+
+        .button.status .button-description {
+            color: #666;
+        }
+
+        .button.status:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            background-color: white;
+        }
+
+        .button.rejected {
+            border-top: 5px solid #f44336;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Employee Management System</h1>
+    </div>
+
+    <div class="search-container">
+        <input type="text" 
+               class="search-box" 
+               placeholder="Search employees..." 
+               id="searchInput"
+               onkeyup="searchFunction()">
+    </div>
+
+    <div class="button-container">
+        <a href="new_request.php" class="button registration">
+            <div class="button-title">New Request</div>
+            <div class="button-description">Request something</div>
+        </a>
+
+        <a href="approval_login.html" class="button approvals">
+            <div class="button-title">Approvals</div>
+            <div class="button-description">View and manage pending approvals</div>
+        </a>
+
+        <a href="list.html" class="button list">
+            <div class="button-title">Employee List</div>
+            <div class="button-description">View all registered employees</div>
+        </a>
+
+        <a href="view_approvals.php" class="button status">
+            <div class="button-title">Approval Status</div>
+            <div class="button-description">Track registration approval progress</div>
+        </a>
+
+        <a href="rejected_forms.php" class="button rejected">
+            <div class="button-title">Rejected Forms</div>
+            <div class="button-description">View all rejected registrations</div>
+        </a>
+    </div>
+
+    <script>
+        function searchFunction() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const buttons = document.getElementsByClassName('button');
+
+            for (let i = 0; i < buttons.length; i++) {
+                const title = buttons[i].querySelector('.button-title').textContent;
+                const description = buttons[i].querySelector('.button-description').textContent;
+                const text = title + ' ' + description;
+                
+                if (text.toLowerCase().includes(filter)) {
+                    buttons[i].style.display = "";
+                } else {
+                    buttons[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html> 
